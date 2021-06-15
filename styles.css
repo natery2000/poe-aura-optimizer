@@ -4,5 +4,14 @@
 }
 
 body {
-    background-color: black;
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+label {
+  color: white;
 }

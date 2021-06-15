@@ -5,7 +5,8 @@
             "name": "Launch index.html",
             "type": "chrome",
             "request": "launch",
-            "file": "${workspaceFolder}/index.html"
+            "url": "http://localhost/poe-aura-optimizer/index.html",
+            "webroot": "${workspaceFolder}/wwwroot"
         }
     ]
 }
