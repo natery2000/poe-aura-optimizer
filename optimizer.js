@@ -1,9 +1,10 @@
 export function getOptimizedAuras(options) {
-    var headCombinations = combinations(options.auras, options.head);
-
-    return {
-        head: [headCombinations]
+    var combos = {};
+    for (var equipmentLimit in options.equipmentLimits) {
+        combos[equipmentLimit] = combinations(options.auras, options.equipmentLimits[equipmentLimit]);        
     };
+
+    return combos;
 }
 
 function combinations(list, length) {

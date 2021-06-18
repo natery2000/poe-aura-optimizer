@@ -5,10 +5,13 @@ import { equipmentLimits } from "./equimentLimits.js";
 function getOptions() {
     var options = {};
     options.auras = [];
+    options.equipmentLimits = []
     auras.forEach(function(aura) {
-        if (document.getElementById(aura.name).checked) {options.auras.push(aura);}
+        if (document.getElementById("aura." + aura.name).checked) {options.auras.push(aura);}
     });
-    options.head = 2;
+    equipmentLimits.forEach(function(equipmentLimit) {
+        options.equipmentLimits[equipmentLimit.name] = document.getElementById("equipment." + equipmentLimit.name).selectedIndex;
+    });
     return options;
 }
 
@@ -24,12 +27,12 @@ content.appendChild(auraDiv);
 auras.forEach(function(aura) {
     var input = document.createElement("input");
     input.type = "checkbox";
-    input.id = aura.name;
+    input.id = "aura." + aura.name;
     input.value = aura.name;
     auraDiv.appendChild(input);
 
     var label = document.createElement("label");
-    label.for = aura.name;
+    label.for = "aura." + aura.name;
     label.innerHTML = aura.name;
     auraDiv.appendChild(label);
 
@@ -41,25 +44,25 @@ var equipmentDiv = document.createElement("div");
 content.appendChild(equipmentDiv);
 equipmentLimits.forEach(function(equipmentLimit) {
     var select = document.createElement("select");
+    select.id = "equipment." + equipmentLimit.name;
     select.name = equipmentLimit.name;
-    select.id = equipmentLimit.name;
-    for(var i = 0; i < equipmentLimit.limit; i++) {
+    for(var i = 0; i <= equipmentLimit.limit; i++) {
         var item = document.createElement("option");
-        item.value = i + 1;
-        item.innerHTML = i + 1;
+        item.value = i;
+        item.innerHTML = i;
         select.appendChild(item);
     }
     equipmentDiv.appendChild(select);
 
     var label = document.createElement("label");
-    label.for = equipmentLimit.name;
+    label.for = "equipment." + equipmentLimit.name;
     label.innerHTML = equipmentLimit.name;
     equipmentDiv.appendChild(label);
 
     var br = document.createElement("br");
     equipmentDiv.appendChild(br);
 
-    select.selectedIndex = equipmentLimit.limit - 1;
+    select.selectedIndex = equipmentLimit.limit;
 });
 
 var submitDiv = document.createElement("div");
