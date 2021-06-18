@@ -15,3 +15,16 @@ h1 {
 label {
   color: white;
 }
+
+div {
+  margin-bottom: 15px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+select { 
+  margin-bottom: 3px;
+  font-size: 16;
+}
