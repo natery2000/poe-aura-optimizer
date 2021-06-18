@@ -1,3 +1,4 @@
+import { costTypes } from "./costTypes.js";
 import { equipmentLimits } from "./equimentLimits.js";
 
 export function getOptimizedAuras(options) {
@@ -7,7 +8,7 @@ export function getOptimizedAuras(options) {
         combos[equipmentLimit] = combinations(options.auras, options.equipmentLimits[equipmentLimit]);        
     };
 
-    var sets = getSets(combos, 0, [{}]);
+    var sets = getSets(combos, 0, [{"Head": [], "Body": [], "Main Hand": [], "Off Hand": [], "Neck": [], "Left Ring": [], "Right Ring": [], "Gloves": [], "Boots": []}], options);
 
     return sets.sort(function(set) { return getGemsFromSet(set).length; }).reverse();
 }
@@ -26,7 +27,7 @@ function combinations(list, length) {
     return set.filter(function(auraSet) { return auraSet.length <= length; });
 }
 
-function getSets(combos, index, currentSets) {
+function getSets(combos, index, currentSets, options) {
     if (index >= equipmentLimits.length) return currentSets;
 
     var newSets = [];
@@ -41,11 +42,75 @@ function getSets(combos, index, currentSets) {
         viableNextEquipCombos.forEach(function(nextCombo) {
             var cur = { ...set };
             cur[Object.keys(combos)[index]] = nextCombo;
-            newSets.push.apply(newSets, getSets(combos, index + 1, [cur]))
+            
+            if(isValidSet(cur, options))
+                newSets.push.apply(newSets, getSets(combos, index + 1, [cur], options))
         });
     });
 
     return newSets;
+}
+
+function isValidSet(set, options) {
+    var remainingLife = options.life;
+    var remainingMana = options.mana;
+
+    set["Head"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Body"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Main Hand"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Off Hand"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Neck"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Left Ring"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Right Ring"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Gloves"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+    set["Boots"].forEach(function(aura) {
+        if (aura.costType === costTypes.PERCENT)
+            remainingMana -= options.mana * (aura.cost / 100.);
+        else if (aura.costType === costTypes.FLAT) 
+            remainingMana -= aura.cost;
+    });
+
+    return remainingLife > 0 && remainingMana > 0;
 }
 
 function getGemsFromSet(set) {

@@ -6,12 +6,17 @@ function getOptions() {
     var options = {};
     options.auras = [];
     options.equipmentLimits = []
+    options.life = 1000;
+    options.mana = 1000;
+
     auras.forEach(function(aura) {
         if (document.getElementById("aura." + aura.name).checked) {options.auras.push(aura);}
     });
+    
     equipmentLimits.forEach(function(equipmentLimit) {
         options.equipmentLimits[equipmentLimit.name] = document.getElementById("equipment." + equipmentLimit.name).selectedIndex;
     });
+    
     return options;
 }
 
