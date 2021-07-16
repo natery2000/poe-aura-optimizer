@@ -1,4 +1,4 @@
 export const costTypes = {
-    PERCENT: 1,
-    FLAT: 2
-}
+  PERCENT: 1,
+  FLAT: 2,
+};

@@ -16,7 +16,7 @@ label {
   color: white;
 }
 
-div {
+.section {
   margin-bottom: 15px;
 }
 
@@ -27,4 +27,46 @@ input {
 select { 
   margin-bottom: 3px;
   font-size: 16;
+}
+
+.row {
+  clear: left;
+  height: 18px;
+  margin: 0px 0px 0px 0px;
+  width: max-content;
+  border-style: outset;
+}
+
+.column {
+  background-color: white;
+  height: 18px;
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.columnheader {
+  background-color: rgb(160, 160, 160);
+  width: 400px;
+  height: 18px;
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.listview-text {
+  margin: 0px 0px 0px 3px;
+}
+
+.separator {
+  background-color: black;
+  width: 1px;
+  height: 18px;
+  float: left;
+}
+
+.listviewitems {
+  overflow-y: scroll; 
+  height: 200px; 
+  width: max-content;
 }
