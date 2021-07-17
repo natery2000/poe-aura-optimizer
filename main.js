@@ -1,4 +1,4 @@
-import { getGemsFromSet, getOptimizedAuras } from "./optimizer.js";
+import { getAuraCount, getGemsFromSet, getOptimizedAuras } from "./optimizer.js";
 import { auras } from "./gems.js";
 import { equipmentLimits } from "./equimentLimits.js";
 
@@ -29,66 +29,20 @@ function optimize() {
   fillListview(optimizedAuras);
 }
 
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}
+
 function fillListview(optimizedAuras) {
-  console.log(optimizedAuras);
+  var listviewItemsDiv = document.getElementById('listviewitems');
 
-  var content = document.getElementById("content");
+  removeAllChildNodes(listviewItemsDiv);
 
-  var listviewDiv = document.createElement("div");
-  listviewDiv.className = "listview section";
-  content.appendChild(listviewDiv);
-
-  var listviewHeaderDiv = document.createElement("div");
-  listviewHeaderDiv.className = "listviewheader 2";
-  listviewDiv.appendChild(listviewHeaderDiv);
-
-  var headerRowDiv = document.createElement("div");
-  headerRowDiv.className = "row";
-  listviewHeaderDiv.appendChild(headerRowDiv);
-
-  var columnHeaderAuraDiv = document.createElement("div");
-  columnHeaderAuraDiv.className = "columnheader";
-  columnHeaderAuraDiv.style = "width: 400px;";
-  headerRowDiv.appendChild(columnHeaderAuraDiv);
-
-  var columnHeaderAuraP = document.createElement("p");
-  columnHeaderAuraP.className = "listview-text";
-  columnHeaderAuraP.innerHTML = "Auras";
-  columnHeaderAuraDiv.appendChild(columnHeaderAuraP);
-
-  var separatorAuraDiv = document.createElement("div");
-  separatorAuraDiv.className = "separator";
-  headerRowDiv.appendChild(separatorAuraDiv);
-
-  var columnHeaderLifeDiv = document.createElement("div");
-  columnHeaderLifeDiv.className = "columnheader";
-  columnHeaderLifeDiv.style = "width: 200px;";
-  headerRowDiv.appendChild(columnHeaderLifeDiv);
-
-  var columnHeaderLifeP = document.createElement("p");
-  columnHeaderLifeP.className = "listview-text";
-  columnHeaderLifeP.innerHTML = "Life";
-  columnHeaderLifeDiv.appendChild(columnHeaderLifeP);
-
-  var separatorLifeDiv = document.createElement("div");
-  separatorLifeDiv.className = "separator";
-  headerRowDiv.appendChild(separatorLifeDiv);
-
-  var columnHeaderManaDiv = document.createElement("div");
-  columnHeaderManaDiv.className = "columnheader";
-  columnHeaderManaDiv.style = "width: 200px;";
-  headerRowDiv.appendChild(columnHeaderManaDiv);
-
-  var columnHeaderManaP = document.createElement("p");
-  columnHeaderManaP.className = "listview-text";
-  columnHeaderManaP.innerHTML = "Mana";
-  columnHeaderManaDiv.appendChild(columnHeaderManaP);
-
-  var listviewItemsDiv = document.createElement("div");
-  listviewItemsDiv.classList = "listviewitems";
-  listviewDiv.appendChild(listviewItemsDiv);
-
-  for (var set in optimizedAuras) {
+  var maxAuras = Math.max(...optimizedAuras.map(function(set) { return getAuraCount(set); }));
+  var auras = optimizedAuras.filter(function(set) { return getAuraCount(set) == maxAuras; });
+  for (var set in auras) {
     var auraRowDiv = document.createElement("div");
     auraRowDiv.className = "row";
     listviewItemsDiv.appendChild(auraRowDiv);
@@ -100,7 +54,7 @@ function fillListview(optimizedAuras) {
   
     var columnAuraP = document.createElement("p");
     columnAuraP.className = "listview-text";
-    columnAuraP.innerHTML = getGemsFromSet(optimizedAuras[set]).map(function(aura) { return aura.name; }).join(', ');
+    columnAuraP.innerHTML = getGemsFromSet(auras[set]).map(function(aura) { return aura.name; }).join(', ');
     columnAuraDiv.appendChild(columnAuraP);
   
     var separatorAuraRowDiv = document.createElement("div");
@@ -114,7 +68,7 @@ function fillListview(optimizedAuras) {
   
     var columnAuraLifeP = document.createElement("p");
     columnAuraLifeP.className = "listview-text";
-    columnAuraLifeP.innerHTML = Math.round(optimizedAuras[set].remainingLife.toFixed(3) * 1000) / 1000;
+    columnAuraLifeP.innerHTML = Math.round(auras[set].remainingLife.toFixed(3) * 1000) / 1000;
     columnLifeDiv.appendChild(columnAuraLifeP);
   
     var separatorAuraLifeDiv = document.createElement("div");
@@ -188,3 +142,62 @@ var submit = document.createElement("button");
 submit.innerHTML = "Optimize";
 submit.onclick = optimize;
 submitDiv.appendChild(submit);
+
+var listviewDiv = document.createElement("div");
+listviewDiv.className = "listview section";
+content.appendChild(listviewDiv);
+
+var listviewHeaderDiv = document.createElement("div");
+listviewHeaderDiv.className = "listviewheader 2";
+listviewDiv.appendChild(listviewHeaderDiv);
+
+var headerRowDiv = document.createElement("div");
+headerRowDiv.className = "row";
+listviewHeaderDiv.appendChild(headerRowDiv);
+
+var columnHeaderAuraDiv = document.createElement("div");
+columnHeaderAuraDiv.className = "columnheader";
+columnHeaderAuraDiv.style = "width: 400px;";
+headerRowDiv.appendChild(columnHeaderAuraDiv);
+
+var columnHeaderAuraP = document.createElement("p");
+columnHeaderAuraP.className = "listview-text";
+columnHeaderAuraP.innerHTML = "Auras";
+columnHeaderAuraDiv.appendChild(columnHeaderAuraP);
+
+var separatorAuraDiv = document.createElement("div");
+separatorAuraDiv.className = "separator";
+headerRowDiv.appendChild(separatorAuraDiv);
+
+var columnHeaderLifeDiv = document.createElement("div");
+columnHeaderLifeDiv.className = "columnheader";
+columnHeaderLifeDiv.style = "width: 200px;";
+headerRowDiv.appendChild(columnHeaderLifeDiv);
+
+var columnHeaderLifeP = document.createElement("p");
+columnHeaderLifeP.className = "listview-text";
+columnHeaderLifeP.innerHTML = "Life";
+columnHeaderLifeDiv.appendChild(columnHeaderLifeP);
+
+var separatorLifeDiv = document.createElement("div");
+separatorLifeDiv.className = "separator";
+headerRowDiv.appendChild(separatorLifeDiv);
+
+var columnHeaderManaDiv = document.createElement("div");
+columnHeaderManaDiv.className = "columnheader";
+columnHeaderManaDiv.style = "width: 200px;";
+headerRowDiv.appendChild(columnHeaderManaDiv);
+
+var columnHeaderManaP = document.createElement("p");
+columnHeaderManaP.className = "listview-text";
+columnHeaderManaP.innerHTML = "Mana";
+columnHeaderManaDiv.appendChild(columnHeaderManaP);
+
+var listviewItemsDiv = document.createElement("div");
+listviewItemsDiv.id = "listviewitems";
+listviewItemsDiv.className = "listviewitems";
+listviewDiv.appendChild(listviewItemsDiv);
+
+var listviewSpacerDiv = document.createElement("div");
+listviewSpacerDiv.style = "height: 0px; width: 808px;";
+listviewItemsDiv.appendChild(listviewSpacerDiv);

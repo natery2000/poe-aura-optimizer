@@ -2,6 +2,16 @@ import { costTypes } from "./costTypes.js";
 import { equipmentLimits } from "./equimentLimits.js";
 import { supports } from "./gems.js";
 
+export function getGemsFromSet(set) {
+  var usedGems = [];
+  for (var equip in set) {
+    if (Array.isArray(set[equip])) {
+      usedGems.push.apply(usedGems, set[equip]);
+    }
+  }
+  return usedGems;
+}
+
 export function getOptimizedAuras(options) {
   var combos = {};
 
@@ -17,15 +27,15 @@ export function getOptimizedAuras(options) {
     0,
     [
       {
-        "Head": [],
-        "Body": [],
+        Head: [],
+        Body: [],
         "Main Hand": [],
         "Off Hand": [],
-        "Neck": [],
+        Neck: [],
         "Left Ring": [],
         "Right Ring": [],
-        "Gloves": [],
-        "Boots": [],
+        Gloves: [],
+        Boots: [],
       },
     ],
     options
@@ -36,6 +46,12 @@ export function getOptimizedAuras(options) {
       return getGemsFromSet(set).length;
     })
     .reverse();
+}
+
+export function getAuraCount(set) {
+  return getGemsFromSet(set).filter(function (gem) {
+    return !gem.name.includes("Enlight");
+  }).length;
 }
 
 function combinations(list, length) {
@@ -95,47 +111,183 @@ function isValidSet(set, options) {
   var remainingMana = options.mana;
 
   set["Head"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
-      remainingMana -= options.mana * (aura.cost / 100);
-    else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
+    var multiplier = 1;
+    if (
+      set["Head"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Head"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
+      remainingMana -= options.mana * (aura.cost / 100) * multiplier;
+    else if (aura.costType === costTypes.FLAT)
+      remainingMana -= aura.cost * multiplier;
   });
   set["Body"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Body"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Body"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Main Hand"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Main Hand"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Main Hand"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Off Hand"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Off Hand"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Off Hand"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Neck"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Neck"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Neck"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Left Ring"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Left Ring"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Left Ring"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Right Ring"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Right Ring"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Right Ring"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Gloves"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Gloves"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Gloves"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set["Boots"].forEach(function (aura) {
-    if (aura.costType === costTypes.PERCENT)
+    var multiplier = 1;
+    if (
+      set["Boots"].some(function (aura) {
+        return aura.name.includes("Enlight");
+      })
+    )
+      multiplier *= supports.filter(function (support) {
+        return (
+          support.name ==
+          set["Boots"].filter(function (aura) {
+            return aura.name.includes("Enlight");
+          })[0].name
+        );
+      })[0].cost;
+    if (aura.name.includes("Enlight")) var x = 0;
+    else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
@@ -144,14 +296,4 @@ function isValidSet(set, options) {
   set.remainingMana = remainingMana;
 
   return remainingLife > 0 && remainingMana > 0;
-}
-
-export function getGemsFromSet(set) {
-  var usedGems = [];
-  for (var equip in set) {
-    if (Array.isArray(set[equip])) {
-      usedGems.push.apply(usedGems, set[equip]);
-    }
-  }
-  return usedGems;
 }
