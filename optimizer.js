@@ -111,7 +111,7 @@ function isValidSet(set, options) {
   var remainingMana = options.mana;
 
   set['Head'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Head'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -132,7 +132,7 @@ function isValidSet(set, options) {
       remainingMana -= aura.cost * multiplier;
   });
   set['Body'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Body'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -152,7 +152,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Main Hand'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Main Hand'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -172,7 +172,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Off Hand'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Off Hand'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -192,7 +192,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Neck'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Neck'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -212,7 +212,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Left Ring'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Left Ring'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -232,7 +232,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Right Ring'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Right Ring'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -252,7 +252,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Gloves'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Gloves'].some(function (aura) {
         return aura.name.includes('Enlight');
@@ -272,7 +272,7 @@ function isValidSet(set, options) {
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
   set['Boots'].forEach(function (aura) {
-    var multiplier = 1;
+    var multiplier = (100. - options.globalRMR) / 100.;
     if (
       set['Boots'].some(function (aura) {
         return aura.name.includes('Enlight');

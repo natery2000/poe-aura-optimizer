@@ -8,6 +8,7 @@ function getOptions() {
   options.equipmentLimits = [];
   options.life = 1000;
   options.mana = 1000;
+  options.globalRMR = document.getElementById('rmr').value;
 
   auras.forEach(function (aura) {
     if (document.getElementById('aura.' + aura.name).checked) {
@@ -90,6 +91,19 @@ function fillListview(optimizedAuras) {
 var content = document.getElementById('content');
 
 var rmrDiv = document.createElement('div');
+rmrDiv.className = 'section';
+content.appendChild(rmrDiv);
+
+var rmrInput = document.createElement('input');
+rmrInput.type = 'text';
+rmrInput.id = 'rmr';
+rmrInput.value = 0;
+rmrDiv.appendChild(rmrInput);
+
+var rmrLabel = document.createElement('label');
+rmrLabel.for = 'rmr';
+rmrLabel.innerHTML = '% global RMR (passive tree + rare affix)';
+rmrDiv.appendChild(rmrLabel);
 
 var auraDiv = document.createElement('div');
 auraDiv.className = 'section';
