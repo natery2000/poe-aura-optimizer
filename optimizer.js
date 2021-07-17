@@ -1,6 +1,6 @@
-import { costTypes } from "./costTypes.js";
-import { equipmentLimits } from "./equimentLimits.js";
-import { supports } from "./gems.js";
+import { costTypes } from './costTypes.js';
+import { equipmentLimits } from './equimentLimits.js';
+import { supports } from './gems.js';
 
 export function getGemsFromSet(set) {
   var usedGems = [];
@@ -29,11 +29,11 @@ export function getOptimizedAuras(options) {
       {
         Head: [],
         Body: [],
-        "Main Hand": [],
-        "Off Hand": [],
+        'Main Hand': [],
+        'Off Hand': [],
         Neck: [],
-        "Left Ring": [],
-        "Right Ring": [],
+        'Left Ring': [],
+        'Right Ring': [],
         Gloves: [],
         Boots: [],
       },
@@ -50,7 +50,7 @@ export function getOptimizedAuras(options) {
 
 export function getAuraCount(set) {
   return getGemsFromSet(set).filter(function (gem) {
-    return !gem.name.includes("Enlight");
+    return !gem.name.includes('Enlight');
   }).length;
 }
 
@@ -110,183 +110,183 @@ function isValidSet(set, options) {
   var remainingLife = options.life;
   var remainingMana = options.mana;
 
-  set["Head"].forEach(function (aura) {
+  set['Head'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Head"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Head'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Head"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Head'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100) * multiplier;
     else if (aura.costType === costTypes.FLAT)
       remainingMana -= aura.cost * multiplier;
   });
-  set["Body"].forEach(function (aura) {
+  set['Body'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Body"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Body'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Body"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Body'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Main Hand"].forEach(function (aura) {
+  set['Main Hand'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Main Hand"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Main Hand'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Main Hand"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Main Hand'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Off Hand"].forEach(function (aura) {
+  set['Off Hand'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Off Hand"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Off Hand'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Off Hand"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Off Hand'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Neck"].forEach(function (aura) {
+  set['Neck'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Neck"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Neck'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Neck"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Neck'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Left Ring"].forEach(function (aura) {
+  set['Left Ring'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Left Ring"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Left Ring'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Left Ring"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Left Ring'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Right Ring"].forEach(function (aura) {
+  set['Right Ring'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Right Ring"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Right Ring'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Right Ring"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Right Ring'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Gloves"].forEach(function (aura) {
+  set['Gloves'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Gloves"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Gloves'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Gloves"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Gloves'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
   });
-  set["Boots"].forEach(function (aura) {
+  set['Boots'].forEach(function (aura) {
     var multiplier = 1;
     if (
-      set["Boots"].some(function (aura) {
-        return aura.name.includes("Enlight");
+      set['Boots'].some(function (aura) {
+        return aura.name.includes('Enlight');
       })
     )
       multiplier *= supports.filter(function (support) {
         return (
           support.name ==
-          set["Boots"].filter(function (aura) {
-            return aura.name.includes("Enlight");
+          set['Boots'].filter(function (aura) {
+            return aura.name.includes('Enlight');
           })[0].name
         );
       })[0].cost;
-    if (aura.name.includes("Enlight")) var x = 0;
+    if (aura.name.includes('Enlight')) var x = 0;
     else if (aura.costType === costTypes.PERCENT)
       remainingMana -= options.mana * (aura.cost / 100);
     else if (aura.costType === costTypes.FLAT) remainingMana -= aura.cost;
