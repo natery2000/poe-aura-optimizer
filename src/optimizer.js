@@ -1,6 +1,6 @@
-import { costTypes } from './costTypes.js';
-import { equipmentLimits } from './equimentLimits.js';
-import { supports } from './gems.js';
+import { costTypes } from './data/costTypes.js';
+import { equipmentLimits } from './data/equipmentLimits.js';
+import { supports } from './data/gems.js';
 
 export function getGemsFromSet(set) {
   var usedGems = [];
