@@ -3,4 +3,5 @@ version: 1.0.{build}
 services:
 - docker
 build_script:
-  - sh: docker version
+  - sh: docker build -t natery2000/poe-aura-optimizer:latest .
+  - sh: docker push natery2000/poe-aura-optimizer:latest
