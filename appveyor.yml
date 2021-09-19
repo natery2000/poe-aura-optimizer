@@ -4,5 +4,8 @@ services:
 - docker
 build_script:
   - sh: docker login -u $dockerhubuser -p $dockerhubpassword
-  - sh: docker build -t natery2000/poe-aura-optimizer:latest .
-  - sh: docker push natery2000/poe-aura-optimizer:latest
+  - sh: export CONTAINER_VERSION="natery2000/poe-aura-optimizer:${VERSION}"
+  - sh: echo $CONTAINER_VERSION
+  - sh: docker build -t $CONTAINER_VERSION .
+  - sh: docker push $CONTAINER_VERSION
+test: off
