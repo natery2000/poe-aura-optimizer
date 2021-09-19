@@ -2,6 +2,8 @@ image: Ubuntu
 version: 1.0.{build}
 services:
 - docker
+environment:
+  VERSION: $(APPVEYOR_BUILD_VERSION)
 build_script:
   - sh: docker login -u $dockerhubuser -p $dockerhubpassword
   - sh: export CONTAINER_VERSION="natery2000/poe-aura-optimizer:${VERSION}"
