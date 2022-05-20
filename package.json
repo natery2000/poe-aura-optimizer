@@ -4,22 +4,16 @@
   "description": "Aura optimizer for Path of Exile",
   "main": "webpack.config.js",
   "dependencies": {
+    "@babel/preset-env": "^7.18.0",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "css-loader": "^1.0.0",
-    "react-hot-loader": "^4.3.11",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.11"
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-dev-server": "^4.9.0"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development"
@@ -33,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/natery2000/poe-aura-optimizer/issues"
   },
-  "homepage": "https://github.com/natery2000/poe-aura-optimizer#readme"
+  "homepage": "https://github.com/natery2000/poe-aura-optimizer#readme",
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
+  }
 }
